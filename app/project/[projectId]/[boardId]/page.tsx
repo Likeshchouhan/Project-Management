@@ -4,10 +4,12 @@ import { Tldraw , type Editor } from "@tldraw/tldraw"
 import "@tldraw/tldraw/tldraw.css"
 import { useEffect, useState } from "react"
 
+
+
 export default function BoardPage({
   params,
 }: {
-  params: Promise<{ boardId: string }>
+  params:{ boardId: string }
 }) {
   const [initialData, setInitialData] = useState<any>(null)
   const [boardId, setBoardId] = useState<string>("")
