@@ -53,7 +53,7 @@ Testing Guide:-
 
 Explain how to test:
 
-User registration/login
+User registration - /login
 
 Create project
 
