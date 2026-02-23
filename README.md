@@ -34,6 +34,12 @@ When a board is opened, the app fetches the snapshot via the GET API route and r
 
 Using JSON allows storing all shapes, positions, and session information in one place.
 
+Setup Instructions:
+Installation Steps-
+git clone <repo-url>
+cd project-name
+npm install
+
 Install dependencies:
 npm install
 
@@ -42,3 +48,17 @@ npx prisma migrate dev --name init
 
 Run the development server:
 npm run dev  
+
+Testing Guide:-
+
+Explain how to test:
+
+User registration/login
+
+Create project
+
+Whiteboard functionality
+
+Database entries
+
+Edge cases
