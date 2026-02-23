@@ -1,11 +1,12 @@
 import {prisma} from "../../../lib/prisma"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(
-  req: Request,
-  { params }: { params: { boardId: string } }
+  request: NextRequest,
+  context: { params: Promise<{ boardId: string }> }
 ) {
-    const { boardId } = await params
+  const { boardId } = await context.params
+
   const board = await prisma.whiteboard.findUnique({
     where: { id: boardId },
   })
@@ -14,17 +15,23 @@ export async function GET(
 }
 
 export async function PUT(
-  req: Request,
-  { params }: { params: { boardId: string } }
+  request: NextRequest,
+  context: { params: Promise<{ boardId: string }> }
 ) {
-    const { boardId } = await params
-  const { data } = await req.json()
+  const { boardId } = await context.params
 
-   const board = await prisma.whiteboard.upsert({
+  const body = await request.json()
+
+  const updatedBoard = await prisma.whiteboard.update({
     where: { id: boardId },
-    update: { data },
-    create: { id: boardId, data },
+    data: {
+      name: body.name,
+      data: body.data,
+    },
   })
 
-  return NextResponse.json({ success: true, board })
+  return NextResponse.json({
+    success: true,
+    board: updatedBoard,
+  })
 }
